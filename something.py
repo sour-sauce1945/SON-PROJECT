@@ -1,5 +1,6 @@
 import math as mt
 from matplotlib import pyplot as plt
+plt.style.use("bmh")
 
 ans = input("Choose base or acid as a titrant or add make a acid/base mixture ")
 if ans.lower() in ["base", "b"]:
@@ -7,8 +8,8 @@ if ans.lower() in ["base", "b"]:
     conc1 = float(input("Enter concentration of acid taken: "))
     milimoles1 = volume1 * conc1
 
-    volume_list = []  # List to store the volume values
-    pH_list = []  # List to store the pH values
+    volume_list = []
+    pH_list = []
 
     while True:
         volume2 = float(input("Enter volume of base taken: "))
@@ -34,10 +35,11 @@ if ans.lower() in ["base", "b"]:
         if A.lower() in ["no", "n"]:
             break
 
-    plt.plot(volume_list, pH_list, marker='o', markerfacecolor='red', markeredgecolor='blue')
+    plt.plot(volume_list, pH_list, marker='o')
     plt.xlabel("Volume of Base")
     plt.ylabel("pH")
     plt.title("Gradual pH Change")
+    plt.grid(True)
     plt.show()
 
 elif ans.lower() in ["acid", "a"]:
@@ -72,9 +74,37 @@ elif ans.lower() in ["acid", "a"]:
         if A.lower() in ["no", "n"]:
             break
 
-    plt.plot(volume_list, pH_list, marker='o', markerfacecolor='red', markeredgecolor='blue')
+    plt.plot(volume_list, pH_list, marker='o')
     plt.xlabel("Volume of Acid")
     plt.ylabel("pH")
     plt.title("Gradual pH Change")
+    plt.grid(True)
     plt.show()
+
+elif ans.lower() in ["amix" ,"am" , "acid mixture"] :
+    volume1 = float(input("Enter volume of Acid 1 taken: "))
+    conc1 = float(input("Enter concentration of Acid 1 taken: "))
+    milimoles1 = volume1 * conc1
+
+    volume2 = float(input("Enter volume of acid 2 taken: "))
+    conc2 = float(input("Enter concentration of acid 2 taken: "))
+    milimoles2 = volume2 * conc2
+
+    H= (milimoles1 + milimoles2)/ volume1 + volume2
+    pH= -(mt.log10(H))
+    print("The pH of this acid mixture is " , pH)
+
+elif ans.lower() in ["bmix" , "bm" , "base mixture"] :
+    volume1 = float(input("Enter volume of base 1 taken: "))
+    conc1 = float(input("Enter concentration of base 1 taken: "))
+    milimoles1 = volume1 * conc1
+
+    volume2 = float(input("Enter volume of base 2 taken: "))
+    conc2 = float(input("Enter concentration of base 2 taken: "))
+    milimoles2 = volume2 * conc2
+
+    OH1 = (milimoles1 + milimoles2) / volume1 + volume2
+    OH2 = -(mt.log10(OH1))
+    pH = 14 - OH2
+    print("The pH of the base mixture is ",pH)
 
